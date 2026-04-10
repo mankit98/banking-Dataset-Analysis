@@ -4,25 +4,25 @@
 
 ### Steps We have follow:
 
-#### after creating database & tables 
-
-#### inserting 10000 rows into the transactions table 
-
-#### fix Date column in all tables 
-
-#### combining data from three tables using SQL 
-
-#### loading data into powerBI desktop  from SQL 
-
-#### KPI Charts & DAX recommendation using ChatGPT :
-
-### DAX:
-    1 - Account Count by Type = COUNT(CombinedBankingDataset[Account_AccountID])
-    2 - Count Of Transaction = COUNT(CombinedBankingDataset[TransactionID])
-    3 - Customer Count by Gender = DISTINCTCOUNT(CombinedBankingDataset[CustomerID])
-    4 - Inactive Accounts = CALCULATE(DISTINCTCOUNT(CombinedBankingDataset[Account_AccountID]), FILTER(VALUES(CombinedBankingDataset[Account_AccountID]), CALCULATE(MAX(CombinedBankingDataset[TransactionDate])) < TODAY()-90))
-    5 - Monthly Transaction Amount = CALCULATE(SUM(CombinedBankingDataset[Amount]), ALLEXCEPT(CombinedBankingDataset, CombinedBankingDataset[TransactionDate].[Month]))
-    6 - Monthly Transaction Balance = CALCULATE(SUM(CombinedBankingDataset[Balance]), ALLEXCEPT(CombinedBankingDataset, CombinedBankingDataset[TransactionDate].[Month]))
-    7 - Total Balance = SUM(CombinedBankingDataset[Balance])
-    8 - Customer Age = DATEDIFF(CombinedBankingDataset[DateOfBirth], TODAY(), YEAR)
-    9 - Customer Age Group = SWITCH(TRUE(), [Customer Age]<=25, "â‰¤25", [Customer Age]<=35, "26-35", [Customer Age]<=50,"36-50","51+")
+        #### - After creating database & tables 
+        
+        #### - inserting 10000 rows into the transactions table 
+        
+        #### - fix Date column in all tables 
+        
+        #### - combining data from three tables using SQL 
+        
+        #### - loading data into powerBI desktop  from SQL 
+        
+        #### - KPI Charts & DAX recommendation using ChatGPT :
+        
+        ### DAX:
+            1 - Account Count by Type = COUNT(CombinedBankingDataset[Account_AccountID])
+            2 - Count Of Transaction = COUNT(CombinedBankingDataset[TransactionID])
+            3 - Customer Count by Gender = DISTINCTCOUNT(CombinedBankingDataset[CustomerID])
+            4 - Inactive Accounts = CALCULATE(DISTINCTCOUNT(CombinedBankingDataset[Account_AccountID]), FILTER(VALUES(CombinedBankingDataset[Account_AccountID]), CALCULATE(MAX(CombinedBankingDataset[TransactionDate])) < TODAY()-90))
+            5 - Monthly Transaction Amount = CALCULATE(SUM(CombinedBankingDataset[Amount]), ALLEXCEPT(CombinedBankingDataset, CombinedBankingDataset[TransactionDate].[Month]))
+            6 - Monthly Transaction Balance = CALCULATE(SUM(CombinedBankingDataset[Balance]), ALLEXCEPT(CombinedBankingDataset, CombinedBankingDataset[TransactionDate].[Month]))
+            7 - Total Balance = SUM(CombinedBankingDataset[Balance])
+            8 - Customer Age = DATEDIFF(CombinedBankingDataset[DateOfBirth], TODAY(), YEAR)
+            9 - Customer Age Group = SWITCH(TRUE(), [Customer Age]<=25, "â‰¤25", [Customer Age]<=35, "26-35", [Customer Age]<=50,"36-50","51+")
