@@ -27,25 +27,58 @@
             8 - Customer Age = DATEDIFF(CombinedBankingDataset[DateOfBirth], TODAY(), YEAR)
             9 - Customer Age Group = SWITCH(TRUE(), [Customer Age]<=25, "â‰¤25", [Customer Age]<=35, "26-35", [Customer Age]<=50,"36-50","51+")
 
-#### -- Data Cleaning 
+#### -- Data Cleaning  - 
+                - For description Column : 
+            Replace values from (null to unKnown)
+            - For currency column : 
+            replace value with uppercase 
+            - For accountID Column : 
+            Keep as Same 
+            - For Account type : 
+            replace values with Capitalize 
+            - Changing data type of some columns :
+            - TransactionDate
 
-#### -- Cleaning Other Date Column 
+#### -- Cleaning Other Date Column  - 
+        change datatype Phone =  to (Whole number)
+        Change datatype DOB = rightclick on that column (change using Local) change to Date (eng us)
+        Change datatype Opendate = rightclick on that column (change using Local) change to Date (eng us)
 
-#### -- Number of transaction by Type 
 
-#### -- Transaction by month 
+#### -- Number of transaction by Type  - 
+         Count Of Transaction = COUNT(CombinedBankingDataset[TransactionID])
 
-#### -- Top 2 transaction by Name 
+#### -- Transaction by month  - 
+        Monthly Transaction Amount = CALCULATE(SUM(CombinedBankingDataset[Amount]), ALLEXCEPT(CombinedBankingDataset, CombinedBankingDataset[TransactionDate].              [Month]))
 
-#### -- Total balance by Account Type 
+#### -- Top 2 transaction by Name  - 
+        used (amount , name column) for Column Chart with filter for TOP 2 transaction by Name
 
-#### -- inactive Accounts by year & month 
+#### -- Total balance by Account Type  - 
+        Total Balance = SUM(CombinedBankingDataset[Balance])
 
-#### -- Customer Count By gender 
+#### -- inactive Accounts by year & month  - 
+        Inactive Accounts = CALCULATE(DISTINCTCOUNT(CombinedBankingDataset[Account_AccountID]), FILTER(VALUES(CombinedBankingDataset[Account_AccountID]),                   CALCULATE(MAX(CombinedBankingDataset[TransactionDate])) < TODAY()-90))
 
-#### -- Number of customer by Age Group 
+#### -- Customer Count By gender  - 
+         Customer Count by Gender = DISTINCTCOUNT(CombinedBankingDataset[CustomerID])
 
-#### -- Creating & Formating the Tree Map
+#### -- Number of customer by Age Group  - 
+        DAX : 
+        Customer Age = DATEDIFF(CombinedBankingDataset[DateOfBirth], TODAY(), YEAR)
+        Customer Age Group = SWITCH(TRUE(), [Customer Age]<=25, "â‰¤25", [Customer Age]<=35, "26-35", [Customer Age]<=50,"36-50","51+")
 
-#### -- Adding Remaining Charts 
+
+#### -- Creating & Formating the Tree Map - 
+        DAX Measures : 
+        Account Count by Type = COUNT(CombinedBankingDataset[Account_AccountID])
+
+
+#### -- Adding Remaining Charts  - 
+         Created  Stacked Bar charts (Name , Balance )
+
+        Used DAX : 
+        Monthly Transaction Balance = CALCULATE(SUM(CombinedBankingDataset[Balance]), ALLEXCEPT(CombinedBankingDataset, CombinedBankingDataset[TransactionDate].[Month]))
+
+#### -- Publish the Report     
 
